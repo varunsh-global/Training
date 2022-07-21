@@ -1,0 +1,33 @@
+package com.globallogic.helloworld;
+
+
+class gen<W,X,Y,Z,A>{
+	W name;
+	X id;
+	Y rollno;
+	Z status;
+	A age;
+	public gen(W name, X id, Y rollno, Z status, A age) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.rollno = rollno;
+		this.status = status;
+		this.age = age;
+	}
+	@Override
+	public String toString() {
+		return "gen [name=" + name + ", id=" + id + ", rollno=" + rollno + ", status=" + status + ", age=" + age + "]";
+	}
+	
+	
+}
+
+public class genericclass {
+	public static void main(String[] args){
+	
+	gen<String,String,String,String,String> exe = new gen<String,String,String,String,String>("1","2","3","4","5");	
+	System.out.println(exe.toString());
+	}
+
+}
