@@ -1,0 +1,62 @@
+package com.globallogic.sort;
+
+/*Implementing lambda programs*/
+
+/* 1-Lambda function to print hello world */
+interface Show{
+	void show();
+}
+
+/* 2-Lambda function to print sum of 1 to 10 numbers */
+interface Sum{
+	void sum(int n);
+}
+
+/* 3-Lambda function to find even or odd number */
+interface Eodd{
+	void find(int a);
+}
+
+/* 4-Lambda function to find largest number */
+interface Largest{
+	int largest(int a,int b,int c);
+}
+
+
+public class Mylambda {
+	public static void main(String[] args){
+		/* 1*/
+		Show sw = () -> {System.out.println("Hello World");};	
+		sw.show();
+		
+		/* 2*/
+
+		Sum s = (n) ->{
+			int ans = 0;
+			while(n>0){
+				ans+=n;
+				n--;
+			}
+			System.out.println("Sum of numbers from 1 to 10 is " + ans);
+		};
+		s.sum(10);
+		
+		/* 3*/
+		Eodd eo = (a) ->{
+			if(a%2==0){
+				System.out.println("The number is even");
+			}
+			else{
+				System.out.println("The number is odd");
+			}
+		};
+		eo.find(43);
+		
+		/* 4*/
+		Largest l = (a,b,c) ->{
+			return (Math.max(a, (Math.max(b, c))));
+		};
+		System.out.println("The largest number is "+ l.largest(34, 31, 98));
+	}
+}
+

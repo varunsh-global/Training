@@ -1,0 +1,31 @@
+package com.globallogic.helloworld;
+
+/* Program to find largest and smallest word in the string "A One two three four" */
+import java.util.*;
+
+public class Largsmall {
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		String txt = sc.nextLine();
+		String lar = "";
+		String small = "";
+		String[] a = txt.split(" ");
+		
+		int mx = a[0].length();
+		int mn = a[0].length();
+		lar = a[0];
+		small = a[0];
+		for(int i=1;i<=a.length-1;i++){
+			if(mx<a[i].length()){
+				mx = a[i].length();
+				lar = a[i];
+			}
+			if(mn>a[i].length()){
+				mn = a[i].length();
+				small = a[i];
+			}
+		}
+		System.out.println("Largest word is " + lar + " Smallest word is " + small);
+	}
+}
+

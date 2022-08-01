@@ -8,9 +8,9 @@ public class reverse {
 		String str = sc.nextLine();
 		char ch;
 		String nest = "";
-		for(int i=0;i<str.length();i++){
+		for(int i=str.length()-1;i>=0;i--){
 			ch = str.charAt(i);
-			nest = ch+nest;
+			nest = nest+ch;
 		}
 		System.out.println("Reverse string: "+ nest);
 	}

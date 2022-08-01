@@ -1,0 +1,24 @@
+package com.globallogic.sort;
+
+/*Implementing lambda programs*/
+
+/* Lambda function to print sum of 1 to 10 numbers */
+interface Sum{
+	void sum(int n);
+}
+
+
+
+public class Mylambda {
+	public static void main(String[] args){
+		Sum s = (n) ->{
+			int ans = 0;
+			while(n>0){
+				ans+=n;
+				n--;
+			}
+			System.out.println("Sum of numbers from 1 to 10 is " + ans);
+		};
+		s.sum(10);
+	}
+}

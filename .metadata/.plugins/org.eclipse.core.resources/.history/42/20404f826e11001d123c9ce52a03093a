@@ -1,0 +1,32 @@
+package com.globallogic.helloworld;
+import java.util.*;
+
+public class Prime {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		boolean flag = true;
+		if(n<=1){
+			flag = false;
+		}
+		if(n<=3){
+			flag = true;
+		}
+		if(n%2==0 || n%3==0){
+			flag = false;
+		}
+		int i = 5;
+		while(i*i<=n){
+			if(n%i==0 || n%(i+2)==0){
+				flag = false;
+			}
+			i = i+6;
+		}
+		if(flag = true){
+			System.out.println("Prime");
+		}
+		else{
+			System.out.println("Not Prime");
+		}
+	}
+}
