@@ -1,0 +1,358 @@
+mysql> create database assgn;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use assgn;
+Database changed
+
+mysql> create table employees(emp_id int NOT NULL PRIMARY KEY,emp_name varchar(15),job_name varchar(20),manager_id int,hire_date date,salary decimal(10,2), commision decimal(7,2), dept_id int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into employees values(1,"varun","sde",51,"2022-07-07",20000,2000);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into employees values(1,"varun","sde",51,"2022-07-07",20000,2000,71);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(2,"amit","sdet",52,"2021-05-03",18000,1000,72);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(3,"anuj","qa",53,"2020-01-13",14000,1000,73);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(4,"akash","sales",54,"2021-12-18",25000,5000,74);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(5,"ravi","finance",55,"2011-11-14",28000,15000,75);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employees values(6,"zee","marketing",56,"2015-10-11",45000,25000,76);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employees values(7,"aka","sde",57,"2005-06-23",85000,50000,71);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc employees;
++------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| emp_id     | int           | NO   | PRI | NULL    |       |
+| emp_name   | varchar(15)   | YES  |     | NULL    |       |
+| job_name   | varchar(10)   | YES  |     | NULL    |       |
+| manager_id | int           | YES  |     | NULL    |       |
+| hire_date  | date          | YES  |     | NULL    |       |
+| salary     | decimal(10,2) | YES  |     | NULL    |       |
+| commision  | decimal(7,2)  | YES  |     | NULL    |       |
+| dept_id    | int           | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql>  SELECT * FROM employees;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT salary FROM employees;
++----------+
+| salary   |
++----------+
+| 20000.00 |
+| 18000.00 |
+| 14000.00 |
+| 25000.00 |
+| 28000.00 |
+| 45000.00 |
+| 85000.00 |
++----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT job_name FROM employees;
++-----------+
+| job_name  |
++-----------+
+| sde       |
+| sdet      |
+| qa        |
+| sales     |
+| finance   |
+| marketing |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT emp_name,salary*1.5 "Salary(No. of Dollars) FROM employees;
+    ">
+    "> ;
+    "> "
+    -> ^C
+mysql> ^C
+mysql> SELECT emp_name,salary*1.5 "Salary(No. of Dollars)" FROM employees;
++----------+------------------------+
+| emp_name | Salary(No. of Dollars) |
++----------+------------------------+
+| varun    |              30000.000 |
+| amit     |              27000.000 |
+| anuj     |              21000.000 |
+| akash    |              37500.000 |
+| ravi     |              42000.000 |
+| zee      |              67500.000 |
+| aka      |             127500.000 |
++----------+------------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT(emp_name,job_name) as "Employee & Job" FROM employees;
++----------------+
+| Employee & Job |
++----------------+
+| varunsde       |
+| amitsdet       |
+| anujqa         |
+| akashsales     |
+| ravifinance    |
+| zeemarketing   |
+| akasde         |
++----------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT length(trim(emp_name)) FROM employees;
++------------------------+
+| length(trim(emp_name)) |
++------------------------+
+|                      5 |
+|                      4 |
+|                      4 |
+|                      5 |
+|                      4 |
+|                      3 |
+|                      3 |
++------------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT emp_id,salary,commision FROM employees;
++--------+----------+-----------+
+| emp_id | salary   | commision |
++--------+----------+-----------+
+|      1 | 20000.00 |   2000.00 |
+|      2 | 18000.00 |   1000.00 |
+|      3 | 14000.00 |   1000.00 |
+|      4 | 25000.00 |   5000.00 |
+|      5 | 28000.00 |  15000.00 |
+|      6 | 45000.00 |  25000.00 |
+|      7 | 85000.00 |  50000.00 |
++--------+----------+-----------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT dept_id,job_name FROM employees ;
++---------+-----------+
+| dept_id | job_name  |
++---------+-----------+
+|      71 | sde       |
+|      72 | sdet      |
+|      73 | qa        |
+|      74 | sales     |
+|      75 | finance   |
+|      76 | marketing |
++---------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE dept_id NOT IN (71);
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT avg(salary) FROM employees WHERE job_name = 'sde';
++--------------+
+| avg(salary)  |
++--------------+
+| 52500.000000 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE emp_name = 'amit';
++--------+----------+----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+|      2 | amit     | sdet     |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE (1.25*salary) > 1000;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT emp_name FROM employees WHERE length(emp_name)=4;
++----------+
+| emp_name |
++----------+
+| amit     |
+| anuj     |
+| ravi     |
++----------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE job_name = 'sde';
++--------+----------+----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde      |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      7 | aka      | sde      |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE salary <10000;
+Empty set (0.00 sec)
+
+mysql> SELECT emp_name,job_name,salary FROM employees WHERE job_name = 'Finance';
++----------+----------+----------+
+| emp_name | job_name | salary   |
++----------+----------+----------+
+| ravi     | finance  | 28000.00 |
++----------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE mod(salary,0) = 1;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE mod(salary,0) = 0;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE mod(salary,2) = 0;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employees WHERE hire_date BETWEEN '2021-01-01' AND '2021-12-31';
++--------+----------+----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+|      2 | amit     | sdet     |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      4 | akash    | sales    |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employees where dept_id = 71 or dept_id = 75;
++--------+----------+----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde      |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      5 | ravi     | finance  |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      7 | aka      | sde      |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+3 rows in set (0.00 sec)
+
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employees where manager_id in (51,53,57,54);
++--------+----------+----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde      |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      3 | anuj     | qa       |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales    |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      7 | aka      | sde      |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employees order by dept_id asc, job_name desc;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employees e order by e.job_name asc, e.emp_id desc;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employees order by salary asc;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      2 | amit     | sdet      |         52 | 2021-05-03 | 18000.00 |   1000.00 |      72 |
+|      1 | varun    | sde       |         51 | 2022-07-07 | 20000.00 |   2000.00 |      71 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
+|      7 | aka      | sde       |         57 | 2005-06-23 | 85000.00 |  50000.00 |      71 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from employees where salary<15000 order by salary;
++--------+----------+----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+|      3 | anuj     | qa       |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
++--------+----------+----------+------------+------------+----------+-----------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from employees where job_name not in ('sde','sdet') order by salary asc;
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+| emp_id | emp_name | job_name  | manager_id | hire_date  | salary   | commision | dept_id |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+|      3 | anuj     | qa        |         53 | 2020-01-13 | 14000.00 |   1000.00 |      73 |
+|      4 | akash    | sales     |         54 | 2021-12-18 | 25000.00 |   5000.00 |      74 |
+|      5 | ravi     | finance   |         55 | 2011-11-14 | 28000.00 |  15000.00 |      75 |
+|      6 | zee      | marketing |         56 | 2015-10-11 | 45000.00 |  25000.00 |      76 |
++--------+----------+-----------+------------+------------+----------+-----------+---------+
+4 rows in set (0.00 sec)

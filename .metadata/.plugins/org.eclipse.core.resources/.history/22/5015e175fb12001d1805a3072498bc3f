@@ -1,0 +1,5 @@
+package com.globallogic.sql;
+
+public class MYJDBC {
+
+}
